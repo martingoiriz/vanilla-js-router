@@ -1,0 +1,28 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div id="routes">
+            <div class="disabled" id="backButton" onclick="pop()">
+                <span class="chevron left"></span>
+            </div>
+            <div class="route" id="about" onclick="push('about')">About</div>
+            <div class="route" id="services" onclick="push('services')">Services</div>
+            <div class="route" id="contact" onclick="push('contact')">Contact</div>
+        </div>
+    </header>
+
+    <div id="app"></div>
+
+    <script type="text/javascript" src="router.js"></script>
+</body>
+
+</html>
