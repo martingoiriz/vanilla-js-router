@@ -56,6 +56,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .route {
@@ -82,4 +83,17 @@ body {
   height: 70vh;
   border: 1px solid lightcoral;
   border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  #routes {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .route {
+    margin: 0.5em 0;
+  }
+  #backButton {
+    margin: 0.5em 0;
+  }
 }
