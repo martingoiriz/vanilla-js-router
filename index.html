@@ -9,11 +9,19 @@
 
 <body>
 
+    <div>
+        <input type="radio" name="routerLoad" id="hash" checked onclick="changeRouter()">
+        <label for="hash"> Hash based router</label>
+
+        <input type="radio" name="routerLoad" id="hist" onclick="changeRouter()">
+        <label for="server"> History based router</label>
+    </div>
+
     <header>
         <div id="routes">
-            <div class="disabled" id="backButton" onclick="pop()">
+            <button onclick="pop()" id="backBtn" disabled>
                 <span class="chevron left"></span>
-            </div>
+            </button>
             <div class="route" id="about" onclick="push('about')">About</div>
             <div class="route" id="services" onclick="push('services')">Services</div>
             <div class="route" id="contact" onclick="push('contact')">Contact</div>
@@ -22,7 +30,26 @@
 
     <div id="app"></div>
 
-    <script type="text/javascript" src="router.js"></script>
+    <script type="text/javascript">
+        function changeRouter() {
+            let headScripts = document.head.getElementsByTagName("script")[0];
+            console.log(headScripts);
+            if (headScripts) {
+                headScripts.parentNode.removeChild(headScripts);
+            }
+            let script = document.createElement('script');
+            script.type = "text/javascript";
+            let hashInputRadio = document.getElementById("hash").checked;
+            if (hashInputRadio) {
+                script.src = "hashRouter.js";
+            } else {
+                script.src = "router.js";
+            }
+            document.head.appendChild(script);
+        }
+        changeRouter();
+    </script>
+
 </body>
 
 </html>

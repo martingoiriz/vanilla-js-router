@@ -11,25 +11,21 @@ body {
   align-items: center;
 }
 
-.enabled {
-  color: black;
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
 }
 
-.disabled {
-  color: lightgrey;
-}
-
-#backButton {
+#backBtn {
   cursor: pointer;
+  text-align: center;
   padding: .6em 3em;
   margin: 1.5em;
+  border: 0;
+  align-items: center;
+  border-radius: .5em;
   box-shadow: 1px 1px 2px lightgrey;
-  border-radius: 10px;
-  text-align: center;
-}
-
-#backButton.enabled:active {
-  box-shadow: 0px 0px 2px lightgrey;
+  background: white;
 }
 
 .chevron::before {

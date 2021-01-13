@@ -1,11 +1,19 @@
-window["navigationCount"] = 0;
+window["firstInternalRoute"] = false;
 
-window.addEventListener("popstate", event => {
-  window["navigationCount"] -= 1;
+(function init() {
+  if (window.location.hash.length > 0) {
+    push(window.location.hash.substring(1));
+    window["firstInternalRoute"] = true;
+  } else {
+    reset();
+  }
+})();
 
-  if (window["navigationCount"]) {
-    selectTab(event.state.page);
-    renderContent(event.state.page);
+window.addEventListener("popstate", function(e) {
+  if (window.location.hash !== "" && !window["firstInternalRoute"]) {
+    let page = window.location.hash.substring(1);
+    selectTab(page);
+    renderContent(page);
   } else {
     reset();
   }
@@ -15,15 +23,14 @@ window.addEventListener("popstate", event => {
 // ======= PUBLIC METHODS =======
 
 function push(page) {
-  window["navigationCount"] += 1;
+  window.location.hash = page;
   document.title = page.charAt(0).toUpperCase() + page.slice(1);
   selectTab(page);
   renderContent(page);
-  window.history.pushState({ page }, `${page}`, `${page}`);
 }
 
 function pop() {
-  if (window["navigationCount"] !== 0) {
+  if (window.location.hash !== "" && !window["firstInternalRoute"]) {
     window.history.back();
   } else {
     reset();
@@ -34,6 +41,10 @@ function pop() {
 // ======= PRIVATE METHODS =======
 
 function renderContent(page) {
+  if (page === "") {
+    reset();
+    return;
+  }
   fetch("/" + page + ".html")
     .then(response => {
       return response.text();
@@ -49,9 +60,11 @@ function selectTab(page) {
     .querySelectorAll(".route")
     .forEach(item => item.classList.remove("selected"));
 
-  document
-    .querySelectorAll("#" + page)
-    .forEach(item => item.classList.add("selected"));
+  if (page !== "") {
+    document
+      .querySelectorAll("#" + page)
+      .forEach(item => item.classList.add("selected"));
+  }
 }
 
 function reset() {
@@ -60,4 +73,6 @@ function reset() {
     .querySelectorAll(".route")
     .forEach(item => item.classList.remove("selected"));
   document.querySelector("#app").innerHTML = "Home";
+  window.location.hash = "#";
+  window["firstInternalRoute"] = false;
 }
