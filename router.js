@@ -34,7 +34,7 @@ function pop() {
 // ======= PRIVATE METHODS =======
 
 function renderContent(page) {
-  fetch("/" + page + ".html")
+  fetch("./" + page + ".html")
     .then(response => {
       return response.text();
     })
