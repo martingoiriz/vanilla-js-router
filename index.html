@@ -11,9 +11,9 @@
 
     <header>
         <div id="routes">
-            <div class="disabled" id="backButton" onclick="pop()">
+            <button onclick="pop()" id="backBtn" disabled>
                 <span class="chevron left"></span>
-            </div>
+            </button>
             <div class="route" id="about" onclick="push('about')">About</div>
             <div class="route" id="services" onclick="push('services')">Services</div>
             <div class="route" id="contact" onclick="push('contact')">Contact</div>
@@ -22,7 +22,9 @@
 
     <div id="app"></div>
 
+    <!-- <script type="text/javascript" src="hashRouter.js"></script> -->
     <script type="text/javascript" src="router.js"></script>
+
 </body>
 
 </html>
