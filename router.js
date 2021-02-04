@@ -34,6 +34,13 @@ function pop() {
 // ======= PRIVATE METHODS =======
 
 function renderContent(page) {
+  // Comment this condition ir order to fetch the HTML
+  if (page === "contact") {
+    document.querySelector("#app").innerHTML = Contact(page);
+    return;
+  }
+  // --
+
   fetch("./" + page + ".html")
     .then(response => {
       return response.text();
